@@ -1,0 +1,371 @@
+/* ************************************************************************* */
+/*                    ONE CSS                                                */
+/* ************************************************************************* */
+
+
+
+:root {
+  --color: black;
+  --background-color: white;
+
+  --button-color: black;
+  --button-background-color: black;
+  --button-hover-color:red;
+  --border: 1px solid grey;
+  --font-main: Helvetica, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
+
+  /* HEADER */
+  --header-color: black;
+  --header-background-color: white;
+  --header-height:2vh;
+  --header-min-height:45px;
+  --header-border: 3px solid black;
+
+  /* FOOTER */
+  --footer-color: black;
+  --footer-background-color: white;
+  --footer-height:2vh;
+  --footer-min-height:20px;
+  --footer-border: 3px solid black;
+
+  /* SIDENAV */
+  --sidenav-color: black;
+  --sidenav-background-color: white;
+
+}
+
+* {
+  font-family: var(--font-main);
+  margin:0px;
+  padding:0px;
+  box-sizing: border-box;
+}
+
+html, body {
+
+
+  
+  color: var(--color);
+  background-color: var(--background-color);
+  margin:0px;
+  height:100%;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.2s;
+  margin:0px;
+  color: black;
+  }
+
+  a:visited {
+    color: black;
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: var(--button-hover-color);
+    cursor: pointer;
+  }
+
+
+/* ************************************************************************* */
+/*                    MAIN LAYOUT                                            */
+/* ************************************************************************* */
+
+#divHeader {
+  position:fixed;
+  top:0px;
+  left:0px;
+  right:0px;
+  height: var(--header-height);
+  min-height: var(--header-min-height);
+  color: var(--header-color);
+  background-color: var(--header-background-color);
+  z-index: 2;
+  border-bottom: var(--header-border)
+}
+
+#divBody{
+  position:relative;
+  top: max(var(--header-height), var(--header-min-height));
+  background-color: var(--background-color);
+}
+
+#divFooter {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+
+  position:fixed;
+  bottom:0px;
+  left:0px;
+  right:0px;
+  color: var(--footer-color);
+  background-color: var(--footer-background-color);
+  height: var(--footer-height);
+  z-index: 2;
+  border-top: var(--footer-border)
+}
+
+
+/* ************************************************************************* */
+/*                    HEADER LAYOUT                                          */
+/* ************************************************************************* */
+
+#divHeaderFlexLeft {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  position:absolute;
+  left:0px;
+  right:0px;
+  top:0px;
+  bottom:0px;
+}
+
+#divHeaderFlexCenter {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  position:absolute;
+  left:0px;
+  right:0px;
+  top:0px;
+  bottom:0px;
+
+}
+
+#divHeaderFlexRight {
+  display:flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  position:absolute;
+  left:0px;
+  right:0px;
+  top:0px;
+  bottom:0px;
+  /* border:3px solid blue; */
+}
+
+
+/* ************************************************************************* */
+/*                    SIDENAV LAYOUT                                         */
+/* ************************************************************************* */
+
+#divSideNav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  left: 0;
+
+  color: black;
+  background-color: white;
+
+  /* overflow-y: hidden; */
+  overflow-x: hidden;
+
+  transition: 0.4s;
+  border-right: var(--header-border);
+}
+
+#divSideNavHeader {
+  height: var(--header-height);
+  min-height: var(--header-min-height);
+  color: var(--header-color);
+  background-color: var(--header-background-color);
+  z-index: 3;
+  border-bottom: var(--header-border)
+}
+
+#divSideNavBody {
+  padding-top: 20px;
+  background-color: white;
+  overflow-y: auto;
+  /* font-size: 5vw; */
+}
+
+
+/* ************************************************************************* */
+/*                    RIGHTNAV LAYOUT                                         */
+/* ************************************************************************* */
+
+#divRightNav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+
+  color: black;
+  background-color: white;
+
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  transition: 0.4s;
+  border-left: var(--header-border);
+}
+
+
+#divRightNavBody {
+  padding-top: 20px;
+  background-color: white;
+  overflow-y: auto;
+  /* font-size: 5vw; */
+}
+
+/* ************************************************************************* */
+/*                    FOOTER LAYOUT                                          */
+/* ************************************************************************* */
+
+.divFooterBox{
+  font-family: var(--font-mono);
+  font-size: 50%;
+  width:100%;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content:center;
+  align-items: center;
+  align-content: stretch;
+  border-right: var(--footer-border);
+  padding-left: 10px;
+  padding-right: 10px;
+
+}
+
+/* ************************************************************************* */
+/* ************************************************************************* */
+/*                    SVG HEADER BUTTONS                                     */
+/* ************************************************************************* */
+/* ************************************************************************* */
+
+.divHeaderButtons{
+  padding-left: 0px;
+  padding-right:20px;
+  display: flex;
+  align-items: center;
+  height: max(var(--header-height), var(--header-min-height));
+  z-index: 3;
+  /* border:1px solid red; */
+}
+
+.divHeaderText{
+  padding-top: 10px;
+
+  color:var(--accent-color);
+  font-size: max(var(--header-height), var(--header-min-height));
+  font-weight: bold;
+  z-index: 3;
+}
+
+.svgHeaderButtons{
+  fill: none;
+  stroke: var(--button-color);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: 0.2s;
+  height:100%;
+  z-index: 3;
+}
+
+.svgHeaderButtonsUnsellected{
+  fill: none;
+  stroke: lightgray;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: 0.2s;
+  height:100%;
+  z-index: 3;
+}
+
+.divHeaderButtons:hover{
+  stroke: var(--button-hover-color);
+  cursor:pointer;
+}
+
+.svgHeaderButtons:hover path{
+  stroke: var(--button-hover-color);
+  cursor:pointer;
+}
+
+.svgHeaderButtons:hover circle{
+  stroke: var(--button-hover-color);
+  cursor:pointer;
+}
+
+.svgHeaderButtons:hover line{
+  stroke: var(--button-hover-color);
+  cursor:pointer;
+}
+
+.svgHeaderButtons:hover polygon{
+  stroke: var(--button-hover-color);
+  cursor:pointer;
+}
+
+#svgCarrotPath{
+  transition: 0.4s;
+}
+
+
+/* ************************************************************************* */
+/*                    ICONS                                                  */
+/* ************************************************************************* */
+.svgIcon{
+  width: 1em;
+  stroke: black;
+  transition: 0.2s;
+  z-index: 1;
+  margin-right:10px;
+}
+  .svgIcon:hover {
+    cursor:pointer;
+    stroke: red;
+  }
+
+.svgIconMedium{
+  width: 2em;
+  stroke: black;
+  transition: 0.2s;
+  z-index: 1;
+  margin-right:10px;
+}
+.svgIconMedium:hover {
+    cursor:pointer;
+    stroke: red;
+  }
+
+.svgIconDim{
+
+  stroke:#eee;
+
+}
+    
+/* ************************************************************************* */
+/*                    GENERAL                                                */
+/* ************************************************************************* */
+
+
+.clsHidden{
+  display: none; 
+}
+
+.clsVisible{
+  display: block; 
+}

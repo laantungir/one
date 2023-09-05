@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8"?>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>One</title>
+
+  <!-- <link rel="stylesheet" href="./one.css"> -->
+  <style media="screen">
+
+:root {
+  --color: black;
+  --background-color: white;
+
+  --button-color: black;
+  --button-background-color: black;
+  --button-hover-color:red;
+  --border: 1px solid grey;
+  --font-main: Helvetica, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
+
+  /* HEADER */
+  --header-color: black;
+  --header-background-color: white;
+  --header-height:2vh;
+  --header-min-height:45px;
+  --header-border: 3px solid black;
+
+  /* FOOTER */
+  --footer-color: black;
+  --footer-background-color: white;
+  --footer-height:2vh;
+  --footer-min-height:20px;
+  --footer-border: 3px solid black;
+
+  /* SIDENAV */
+  --sidenav-color: black;
+  --sidenav-background-color: white;
+
+}
+
+* {
+  font-family: var(--font-main);
+  margin:0px;
+  padding:0px;
+  box-sizing: border-box;
+}
+
+html, body {
+  color: var(--color);
+  background-color: var(--background-color);
+  margin:0px;
+  height:100%;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.2s;
+  margin:0px;
+  color: black;
+  }
+
+  a:visited {
+    color: black;
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: var(--button-hover-color);
+    cursor: pointer;
+  }
+
+/* ************************************************************************* */
+/*                    MAIN LAYOUT                                            */
+/* ************************************************************************* */
+
+#divHeader {
+  position:fixed;
+  top:0px;
+  left:0px;
+  right:0px;
+  height: var(--header-height);
+  min-height: var(--header-min-height);
+  color: var(--header-color);
+  background-color: var(--header-background-color);
+  z-index: 2;
+  border-bottom: var(--header-border)
+}
+
+#divBody{
+  position:relative;
+  top: max(var(--header-height), var(--header-min-height));
+  background-color: var(--background-color);
+}
+
+
+
+#divBody {
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow: hidden;
+
+    display: grid;
+    grid-template-columns: repeat(100, 1fr);
+    grid-template-rows: repeat(100, 1fr);
+
+    column-gap:5px;
+    row-gap: 10px;
+    /* border: 4px solid black; */
+
+}
+
+.divBoxCls {
+    /* border: 1px solid lightgray; */
+    /* border-radius: 5px; */
+    /* background-color: red; */
+}
+
+#divBoxHeader {
+    grid-row-start: 1;
+    grid-row-end: 6;
+    grid-column-start: 2;
+    grid-column-end: 100;
+
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width:100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#divTitle{
+    font-family: var(--font-main);
+    font-size: 4vh;
+    font-weight: 900;
+}
+
+#divTitle:hover {
+      cursor:pointer;
+      color: red;
+      }
+
+
+.divBoxSubTitle{
+    font-size: 0.8vh;
+    align-items:flex-start;
+    justify-content: center;
+    border-bottom: 0.1px solid lightgray;
+}
+
+
+
+
+
+/* Relays
+##################################################################### */
+#divRelayTitle{
+    display: flex;
+    grid-row: 6 / 8;
+    grid-column: 2 / 10;
+}
+
+#divRelayBox {
+    grid-row: 8 / 99;
+    grid-column: 2 / 10;
+    /* border: 1px solid lightgray; */
+    font-size: 0.3vw;
+    /* white-space: pre-wrap;
+    word-wrap: break-word; */
+    overflow-y: hidden;
+    overflow-x: hidden;
+    /* background-color: lightpink; */
+}
+
+/* Follows
+##################################################################### */
+#divFollowingTitle{
+    display: flex;
+    grid-row: 6 / 8;
+    grid-column: 10 / 35;
+}
+
+#divFollowingBox {
+    grid-row: 8 / 99;
+    grid-column: 10 / 35;
+    /* border: 1px solid lightgray; */
+    font-size: 0.3vw;
+    /* white-space: pre-wrap;
+    word-wrap: break-word; */
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: rgb(182, 255, 211);
+}
+
+/* Self
+##################################################################### */
+#divSelfTitle{
+    display: flex;
+    grid-row: 6 / 8;
+    grid-column: 35 / 65;
+}
+
+#divSelfBox {
+    grid-row: 8 / 99;
+    grid-column: 35 / 65;
+    /* border: 1px solid lightgray; */
+    font-size: 0.3vw;
+    /* white-space: pre-wrap;
+    word-wrap: break-word; */
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: rgb(255, 158, 197);
+}
+
+/* Messages
+##################################################################### */
+#divMsgTitle{
+    display: flex;
+    grid-row: 6 / 8;
+    grid-column: 65 / 90;
+}
+
+#divMsgBox {
+    grid-row: 8 / 99;
+    grid-column: 65 / 90;
+    /* border: 1px solid lightgray; */
+    font-size: 0.3vw;
+    /* white-space: pre-wrap;
+    word-wrap: break-word; */
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: rgb(255, 245, 158);
+}
+
+/* Global Tweets
+##################################################################### */
+#divGlobalTitle{
+    display: flex;
+    grid-row: 6 / 8;
+    grid-column: 90 / 100;
+}
+
+#divGlobalBox {
+    grid-row: 8 / 99;
+    grid-column: 90 / 100;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width:100%;
+    font-size: 0.3vw;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.divTweet{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    /* color: red; */
+    padding: 0.5vw;
+    margin-top: 0.3vw;
+}
+  </style>
+</head>
+
+
+<!--
+################################################################################
+#####     BODY
+################################################################################
+-->
+
+<body>
+
+  <div id="divBody" class="clsBodyFull">
+    <div id="divBoxHeader" > <div id="divTitle">ONE</div>   </div>
+
+    <div id="divRelayTitle" class="divBoxSubTitle">Relays</div>
+    <div id="divRelayBox" class="divBoxCls"></div>
+
+    <div id="divFollowingTitle" class="divBoxSubTitle">Follows</div>
+    <div id="divFollowingBox" class="divBoxCls"></div>
+
+    <div id="divSelfTitle" class="divBoxSubTitle">Self</div>
+    <div id="divSelfBox" class="divBoxCls"></div>
+
+    <div id="divMsgTitle" class="divBoxSubTitle">Messages</div>
+    <div id="divMsgBox" class="divBoxCls"></div>
+
+    <div id="divGlobalTitle" class="divBoxSubTitle">Global</div>
+    <div id="divGlobalBox" class="divBoxCls"></div>
+
+
+  </div>
+
+
+  <script type="module" src="main.mjs"></script>
+</body>
+
+</html>
