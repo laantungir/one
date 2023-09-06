@@ -178,6 +178,11 @@ a {
     /* background-color: lightpink; */
 }
 
+.tblRelayRow:hover {
+        cursor: pointer;
+        background-color: lightgray; 
+        }
+
 /* Follows
 ##################################################################### */
 #divFollowingTitle{
@@ -196,6 +201,14 @@ a {
     overflow-y: hidden;
     overflow-x: hidden;
     background-color: rgb(182, 255, 211);
+}
+.divFollowingTweet{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    /* color: red; */
+    padding: 0.5vw;
+    margin-top: 0.3vw;
+    font-size: 1vw;
 }
 
 /* Self
@@ -222,7 +235,7 @@ a {
     grid-row: 90 / 99;
     grid-column: 35 / 65;
     border: 1px solid lightgray;
-    font-size: 0.3vw;
+    font-size: 2vw;
     /* white-space: pre-wrap;
     word-wrap: break-word; */
     overflow-y: hidden;
@@ -272,13 +285,29 @@ a {
     overflow-x: hidden;
 }
 
-.divTweet{
-    border: 1px solid lightgray;
+.divEventBox{
     border-radius: 5px;
     /* color: red; */
     padding: 0.5vw;
     margin-top: 0.3vw;
+    font-size: 0.5vw;
+    border: 0.1px dotted lightgrey;
+    color: lightgray;
 }
+
+.divEventType-0{
+    border: 0.1 dashed black;
+    color: grey;
+}
+.divEventType-1{
+    border: 0.1px solid black;
+    color: black;
+}
+.divEventType-3{
+    border: 0.1 dashed black;
+    color: grey;
+}
+
   </style>
 </head>
 
@@ -302,19 +331,20 @@ a {
 
     <div id="divSelfTitle" class="divBoxSubTitle">Self</div>
     <div id="divSelfBox" class="divBoxCls"></div>
-    <div id="divPost" class="divBoxCls"></div>
+    <div id="divPost" class="divBoxCls" contenteditable="true" tabindex="0"></div>
 
     <div id="divMsgTitle" class="divBoxSubTitle">Messages</div>
-    <div id="divMsgBox" class="divBoxCls"></div>
+    <div id="divMsgBox" class="divBoxCls" ></div>
 
     <div id="divGlobalTitle" class="divBoxSubTitle">Global</div>
     <div id="divGlobalBox" class="divBoxCls"></div>
 
 
   </div>
-
-
-  <script type="module" src="main.mjs"></script>
+  <script type="text/javascript" src="./one_lib.js"></script>
+  <script type="text/javascript" src="./follows.js"></script>
+  <script type="text/javascript" src="./nostr.bundle.js"></script>
+  <script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,5 @@
 
 
-import objFollows from './follows.json' assert {type: 'json'};
 
 //////////////////////////////////////////////////////////////////////
 // VARIABLES
@@ -33,6 +32,11 @@ let EventCacheSize = 0 // LAST SIZE OF THE CASHED EVENTS
 let PoolFilter = {}
 let arrSocket = []  // AN ARRAY TO HOLD THE SOCKETS THAT WE ARE CONNECTED TO
 
+let arrFollowList = []
+for (let Each of arrFollows){
+    arrFollowList.push(Each[1])
+}
+
 //////////////////////////////////////////////////////////////////////
 // DOM VARIABLES
 //////////////////////////////////////////////////////////////////////
@@ -41,6 +45,9 @@ const divBody = document.getElementById('divBody')
 const divTitle = document.getElementById('divTitle')
 const divGlobalBox = document.getElementById('divGlobalBox')
 const divRelayBox = document.getElementById('divRelayBox')
+const divPost = document.getElementById('divPost')
+const divMsgBox = document.getElementById('divMsgBox')
+const divFollowingBox = document.getElementById('divFollowingBox')
 
 //////////////////////////////////////////////////////////////////////
 // ROUTINES
@@ -261,56 +268,56 @@ for (Each of arrEvents){
 }
 }
 
-// POST THIS USERS METADATA
-const PostMetadata = async () => {
+    // POST THIS USERS METADATA
+    const PostMetadata = async () => {
 
-let objM = {}
-objM.name = inpName.innerText
-objM.display_name = inpDisplay_Name.innerText
-objM.picture = inpPicture.innerText 
-objM.banner = inpBanner.innerText
-objM.website = inpWebsite.innerText
-objM.about = inpAbout.innerText 
-objM.nip05 = inpNIP_5.innerText 
-objM.lud16 = inpLnAddr.innerText 
+    let objM = {}
+    objM.name = inpName.innerText
+    objM.display_name = inpDisplay_Name.innerText
+    objM.picture = inpPicture.innerText 
+    objM.banner = inpBanner.innerText
+    objM.website = inpWebsite.innerText
+    objM.about = inpAbout.innerText 
+    objM.nip05 = inpNIP_5.innerText 
+    objM.lud16 = inpLnAddr.innerText 
 
-PostEvent(hexSec, hexPub, 0, [], objM)
+    PostEvent(hexSec, hexPub, 0, [], objM)
 }
 
 // POST EVENT 3
 const PostEvent3 = async () => {
 
-strRelays = JSON.stringify( JSON.parse(divRelays.innerText))
-arrContactList =JSON.parse(divContacts.innerText) 
+    strRelays = JSON.stringify( JSON.parse(divRelays.innerText))
+    arrContactList =JSON.parse(divContacts.innerText) 
 
-PostEvent(hexSec, hexPub, 3, arrContactList, strRelays )
+    PostEvent(hexSec, hexPub, 3, arrContactList, strRelays )
 }
 
 
 // POST TWEET
 const PostTweet = async (txtInput) => {
-PostEvent (hexSec, hexPub, 1, [], txtInput)
+    PostEvent (nsecHex, npubHex, 1, [], txtInput)
 }
 
 // POST A GENERAL EVENT
 const PostEvent = async (SecKey, PubKey, Kind, arrTags, strContent, ReceiverPubKey = "") => {
 
-let Event = {}  
-Event.pubkey = PubKey
-Event.created_at = Math.floor(Date.now() / 1000)
-Event.kind = Kind 
-Event.tags = arrTags 
-Event.content = strContent
+    let Event = {}  
+    Event.pubkey = PubKey
+    Event.created_at = Math.floor(Date.now() / 1000)
+    Event.kind = Kind 
+    Event.tags = arrTags 
+    Event.content = strContent
 
 
-Event.id = NostrTools.getEventHash(Event)
-Event.sig = NostrTools.getSignature(Event, SecKey)
+    Event.id = NostrTools.getEventHash(Event)
+    Event.sig = NostrTools.getSignature(Event, SecKey)
 
-let arrSub = ["EVENT", Event]
-console.log(JSON.stringify(arrSub))
-for (const [index, [key, value]] of Object.entries(Object.entries(objRelays))){
-arrSocket[index].send(JSON.stringify(arrSub))
-}
+    let arrSub = ["EVENT", Event]
+    console.log(JSON.stringify(arrSub))
+    for (const [index, [key, value]] of Object.entries(Object.entries(objRelays))){
+    arrSocket[index].send(JSON.stringify(arrSub))
+    }
 
 }
 
@@ -402,39 +409,26 @@ const wsOnMessage = async (event, relay) =>{
 
     if( (E === undefined)){return}
 
-
     // Message from people I follow
-    if (E.kind == 1 && objFollows.includes(["p", E.pubkey])){ 
-
-        // let NewDiv = document.createElement("div")
-        // NewDiv.setAttribute("class", "divTweet")
-        // NewDiv.innerText = E.content.slice(0,100)
-        // divGlobalBox.prepend(NewDiv)
-    
-        // if (divGlobalBox.childElementCount >= 100){
-        //     divGlobalBox.removeChild(divGlobalBox.lastChild);
-        // }
-
-        console.log(E)
-    }
-
-
-
-
-
-
-    // General message
-    if (E.kind == 1){ 
+    if (E.kind == 1 && arrFollowList.includes( E.pubkey)){ 
 
         let NewDiv = document.createElement("div")
-        NewDiv.setAttribute("class", "divTweet")
-        NewDiv.innerText = E.content.slice(0,100)
-        divGlobalBox.prepend(NewDiv)
+        NewDiv.setAttribute("class", "divFollowingTweet")
+        NewDiv.innerHTML = htmlFormatText(E.content) 
+        divFollowingBox.prepend(NewDiv)
     
-        if (divGlobalBox.childElementCount >= 100){
-            divGlobalBox.removeChild(divGlobalBox.lastChild);
+        if (divFollowingBox.childElementCount >= 50){
+            divFollowingBox.removeChild(divFollowingBox.lastChild);
         }
+
     }
+
+
+
+
+
+
+
 
      // Relay message from WholeEnchilada
     if (E.kind == 11000){
@@ -447,6 +441,7 @@ const wsOnMessage = async (event, relay) =>{
         for (const [index, [key, value]] of Object.entries(Object.entries(objRel))){
 
             var row = table.insertRow(index);
+            row.setAttribute("class", "tblRelayRow")
             // row.insertCell(0).innerHTML = key.slice(6).trim()
             var Col0 = row.insertCell(0).innerHTML = (value.connected) ? `+` : `-`
             row.insertCell(1).innerHTML = (value.write) ? `+` : `-`
@@ -461,7 +456,25 @@ const wsOnMessage = async (event, relay) =>{
 
         }
         divRelayBox.appendChild(table)
+        return
     }
+
+
+    // Goobal Events
+    // if (E.kind == 1){ 
+
+        let NewDiv = document.createElement("div")
+
+        NewDiv.setAttribute("class", `divEventBox divEventType-${E.kind}`)
+
+        NewDiv.innerText = E.kind + " - " + E.content.slice(0,100)
+        divGlobalBox.prepend(NewDiv)
+    
+        if (divGlobalBox.childElementCount >= 100){
+            divGlobalBox.removeChild(divGlobalBox.lastChild);
+        }
+    // }
+
 }
 
 
@@ -530,7 +543,7 @@ divPost.setAttribute("style","height:300px")
 
 
 const PostKeyDown = async (e) =>{
-
+    console.log("Key down")
 if (e.key == 'Enter' && e.shiftKey == false){
     PostTweet(divPost.innerText.trim())
 
@@ -551,11 +564,13 @@ if (e.key == 'Enter' && e.shiftKey == false){
 // EVENTS
 //////////////////////////////////////////////////////////////////////
 divTitle.addEventListener("click", ToggleFullScreen);
-
+divPost.addEventListener("keydown", PostKeyDown)
 
 
 //////////////////////////////////////////////////////////////////////
 // MAIN
 //////////////////////////////////////////////////////////////////////
-console.log(typeof jsonFollows)
+
+console.log(arrFollows[0])
+
 ConnectToRelays()
