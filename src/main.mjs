@@ -6,31 +6,19 @@ import objFollows from './follows.json' assert {type: 'json'};
 // VARIABLES
 //////////////////////////////////////////////////////////////////////
 
-const LocalURL = "https://localhost:50000/"
-const jsonDir = `/json/`
-
-let objFormat = {}
-let Password = ""
-
 const Now = Math.floor(Date.now() / 1000)
 const DayAgo = Now - ( 60 * 60 * 24)
 const WeekAgo = Now - ( 60 * 60 * 24 * 7)
 const MonthAgo = Now - ( 60 * 60 * 24 * 30)
 const YearAgo = Now - ( 60 * 60 * 24 * 365)
 
-// DB 
-let dbName = 'nostr'
-let dbFilename = ""
-let objDB = {}   // THE DEFAULT DATABASE
-let User_id = 0   // THE _id OF objSVG IN objDB 
-
-
-
-
-
 // NOSTR variables
 
+const nsecHex = `26bd69f759b4394df0dd34e252bfd0cf2a402a7f9c0987e0c4efa509c477a3a7`
+const nsec = `nsec1y67kna6eksu5muxaxn39907seu4yq2nlnsyc0cxya7jsn3rh5wns5ywwqk`
 
+const npubHex = `2f6bb31e5939a3a57f27246fbf16de14357a12c3a931dfc0da0e84012f5f6352`
+const npub = `npub19a4mx8je8x362le8y3hm79k7zs6h5ykr4ycalsx6p6zqzt6lvdfqzz2q49`
 
 
 let objRelaysDefault = {"wss://localhost:443":{"write":true,"read":true}

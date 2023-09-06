@@ -207,7 +207,7 @@ a {
 }
 
 #divSelfBox {
-    grid-row: 8 / 99;
+    grid-row: 8 / 90;
     grid-column: 35 / 65;
     /* border: 1px solid lightgray; */
     font-size: 0.3vw;
@@ -216,6 +216,18 @@ a {
     overflow-y: hidden;
     overflow-x: hidden;
     background-color: rgb(255, 158, 197);
+}
+
+#divPost {
+    grid-row: 90 / 99;
+    grid-column: 35 / 65;
+    border: 1px solid lightgray;
+    font-size: 0.3vw;
+    /* white-space: pre-wrap;
+    word-wrap: break-word; */
+    overflow-y: hidden;
+    overflow-x: hidden;
+
 }
 
 /* Messages
@@ -290,6 +302,7 @@ a {
 
     <div id="divSelfTitle" class="divBoxSubTitle">Self</div>
     <div id="divSelfBox" class="divBoxCls"></div>
+    <div id="divPost" class="divBoxCls"></div>
 
     <div id="divMsgTitle" class="divBoxSubTitle">Messages</div>
     <div id="divMsgBox" class="divBoxCls"></div>
