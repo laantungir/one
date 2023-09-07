@@ -308,6 +308,33 @@ a {
     color: grey;
 }
 
+
+/* Global Tweets Stats
+##################################################################### */
+
+#divGlobalStatBox {
+    grid-row: 8 / 15;
+    grid-column: 90 / 100;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width:100%;
+    font-size: 0.3vw;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    background-color: white;
+    z-index: 2;
+}
+
+
+
+
+
+
+
+
   </style>
 </head>
 
@@ -338,7 +365,7 @@ a {
 
     <div id="divGlobalTitle" class="divBoxSubTitle">Global</div>
     <div id="divGlobalBox" class="divBoxCls"></div>
-
+    <div id="divGlobalStatBox" class="divBoxCls"></div>
 
   </div>
   <script type="text/javascript" src="./one_lib.js"></script>

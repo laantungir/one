@@ -20,7 +20,7 @@ const npubHex = `2f6bb31e5939a3a57f27246fbf16de14357a12c3a931dfc0da0e84012f5f635
 const npub = `npub19a4mx8je8x362le8y3hm79k7zs6h5ykr4ycalsx6p6zqzt6lvdfqzz2q49`
 
 
-let objRelaysDefault = {"wss://localhost:443":{"write":true,"read":true}
+let objRelaysDefault = {"ws://localhost:8888":{"write":true,"read":true}
                     }
 
 // let objRelaysDefault = {"wss://localhost:443":{"write":true,"read":true}}
@@ -48,6 +48,7 @@ const divRelayBox = document.getElementById('divRelayBox')
 const divPost = document.getElementById('divPost')
 const divMsgBox = document.getElementById('divMsgBox')
 const divFollowingBox = document.getElementById('divFollowingBox')
+const divGlobalStatBox = document.getElementById('divGlobalStatBox')
 
 //////////////////////////////////////////////////////////////////////
 // ROUTINES
@@ -430,7 +431,7 @@ const wsOnMessage = async (event, relay) =>{
 
 
 
-     // Relay message from WholeEnchilada
+     // Relay data message from WholeEnchilada
     if (E.kind == 11000){
         const Now = Math.floor(Date.now() / 1000)
         let objRel = JSON.parse(E.content)
@@ -456,6 +457,16 @@ const wsOnMessage = async (event, relay) =>{
 
         }
         divRelayBox.appendChild(table)
+        return
+    }
+
+     // Relay data message from WholeEnchilada
+     if (E.kind == 11001){
+        // const Now = Math.floor(Date.now() / 1000)
+        let objRel = JSON.parse(E.content)
+        divGlobalStatBox.innerHTML = E.content
+        console.log(`Received msg`)
+ 
         return
     }
 
